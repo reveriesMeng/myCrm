@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../public/css/login.css">
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+            <h1>用户登录</h1>
+        </div>
+        <form id="login_form" method="post" action="/login">
+            <div class="form-group">
+                <label for="">用户名</label>
+                <input type="text" class="form-control" id="user" name="user" placeholder="User" autofocus>
+            </div>
+            <div class="form-group">
+                <label for="">密码</label>
+                <a class="pull-right" href="">忘记密码？</a>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="checkbox">记住我
+                </label>
+            </div>
+            <button type="submit" class="btn btn-success btn-block" id="submit">登录</button>
+        </form>
+        <div class="message">
+            <p>没有账号? <a href="/register">点击创建</a>.</p>
+        </div>
+    </div>
+    <script type="text/javascript" src="../public/js/myAjax.js"></script>
+    <script>
+    function $(divid) {
+        return document.getElementById(divid);
+    }
+    $("submit").onclick = function() {
+        myAjax({
+            url: "/login",
+            Type: "post",
+            data: { user: $("user").value, password: $("password").value, remeber: $("checkbox").checked},
+            success: function(response) {
+                if (response.ok) {
+                    alert(response.message);
+                    window.location.href="http://localhost:8888/welcome";
+                } else {
+                    alert(response.message);
+                    window.location.href="http://localhost:8888/login";
+                }
+            },
+            error: function(status) {
+                alert("通信错误");
+            }
+        });
+    }
+    </script>
+</body>
+
+</html>
