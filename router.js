@@ -202,20 +202,37 @@ router.get("/out", function(req, res) {
 	res.redirect("/login");
 });
 
-
 //http://localhost:8888
 router.get("/", function(req, res) {
-	res.render("welcome.html");
+	if (logStatus) {
+		res.render("welcome2.html", {
+				yh: req.session.yh
+			});
+	}else {
+		res.render("welcome.html");
+	}
 });
 
 //http://localhost:8888/student
 router.get("/student", function(req, res) {
-	res.render("welcome.html");
+	if (logStatus) {
+		res.render("welcome2.html", {
+				yh: req.session.yh
+			});
+	}else {
+		res.render("welcome.html");
+	}
 });
 
 //错误地址
 router.get("/welcome", function(req, res) {
-	res.render("welcome.html");
+	if (logStatus) {
+		res.render("welcome2.html", {
+				yh: req.session.yh
+			});
+	}else {
+		res.render("welcome.html");
+	}
 });
 
 module.exports = router;
